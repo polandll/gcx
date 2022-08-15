@@ -72,3 +72,4 @@ case $product in
     npm run build:local:gcx
     ;;
 esac
+npm i -g serve; serve

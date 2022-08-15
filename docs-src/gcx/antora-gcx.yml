@@ -1,0 +1,6 @@
+name: docs
+title: GCX
+version: ~
+
+nav:
+  - ROOT/nav.adoc
