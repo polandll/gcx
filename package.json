@@ -1,0 +1,29 @@
+{
+  "name": "gcx-docs",
+  "scripts": {
+    "build:prod:gcx": "npm run build:publish:gcx",
+    "build:prodlint": "npm run build:oaslinter && npm run build:prod:gcx",
+    "build:dev:gcx": "npm run build:restapi && npm run build:restapiv1 && npm run build:docapi && npm run build:local:gcx",
+    "build:publish:gcx": "antora --log-level error --fetch --clean playbooks/site-publish-gcx.yaml",
+    "build:local:gcx": "antora --log-level error --stacktrace --fetch --clean playbooks/site-local-gcx.yaml",
+    "build:linkinator": "npx linkinator https://stargate.io/docs --recurse --skip ' http://localhost?'",
+    "build:linkinator:dev": "npx linkinator https://coppi.sjc.dsinternal.org/en/test-multi-repos/stargate --recurse --skip ' http://localhost?'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stargate/docs.git"
+  },
+  "dependencies": {
+    "@antora/cli": "^3.0.3",
+    "@antora/site-generator-default": "^3.0.3",
+    "@redocly/cli": "1.0.0-beta.102",
+    "antora": "^3.0.3",
+    "linkinator": "^3.0.3",
+    "mobx": "^6.3.12",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "redoc": "^2.0.0-rc.70",
+    "redoc-cli": "^0.13.14",
+    "styled-components": "^5.1.1"
+  }
+}

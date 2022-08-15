@@ -1,0 +1,102 @@
+= Connecting to Astra - Java
+:page-layout: gcx-full
+:driver-matrix-url: https://docs.datastax.com/en/driver-matrix/doc/driver-matrix.html
+:secure-connect-bundle-url: https://docs.datastax.com/en/astra-serverless/docs/connect/secure-connect-bundle.html
+:java-project-url: https://docs.datastax.com/en/developer/java-driver/4.14/manual/core/integration/#minimal-project-structure
+
+Using a Cassandra driver to connect to a https://astra.datastax.com[DataStax Astra] database is almost identical to using the driver to connect to any Apache Cassandra® database. The only differences are:
+
+* how the driver is configured in an application
+* the need to obtain a secure connect bundle
+
+== Driver configuration
+
+All DataStax drivers have configuration file attributes, builder methods, or constructor parameters for pointing to the secure connect bundle. The database username and password are specified through the normal driver APIs for configuring a plain text authentication provider, or through using one of the convenience methods for username and password.
+
+When using the secure connect bundle, the DataStax drivers automatically establish mutually authenticated TLS connections to the service. You do not have to unzip the secure connect bundle or supply contact points.
+
+After establishing a connection the resulting session is optimally configured for interacting with your Astra database. It is possible (but not required) to use other advanced features, such as Speculative query execution and Execution profiles.
+
+The {driver-matrix-url}[DataStax driver] documentation for your language contains getting started examples and API documentation. Upgrade to the latest minor version of your language’s driver to get the new Astra connection API.
+
+== Prerequisites
+
+* https://maven.apache.org/download.cgi[Download] and https://maven.apache.org/install.html[install] Maven.
+* Create an Astra database and {secure-connect-bundle-url}[download your secure connect bundle] that contains connection information such as contact points and certificates.
+* Create a minimal project structure as explained {java-project-url}[here]. 
+
+[.gcx-hook-connect='3-5']
+== Import the required classes
+
+Import the classes required to create a CQL session and read metadata.
+
+[.gcx-hook-connect='10-13']
+== Identify the required connection filenames in variables
+
+Information specific to your Astra database is defined as variables to call in the connection class. 
+
+[.gcx-hook-connect='17-26']
+== Connecting to the database
+
+Using a combination of the secure bundle file and its associated credentials, connect to your Astra database.
+
+[.gcx-hook-connect='27-29']
+== Retrieving metadata
+
+After connecting to the database, get a metadata object and retrieve information about the nodes that comprise the cluster.
+
+[.gcx-hook-connect='40-42']
+== Create connection in main
+
+Create a new connection client and connect. The client is also closed.
+
+
+[.gcx-code-connect] 
+[source,Java]
+----
+package biz.bisso.cstar;
+
+import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.metadata.Metadata;
+import com.datastax.oss.driver.api.core.metadata.Node;
+
+import java.nio.file.Paths;
+
+public class ConnectionClient {
+	public static final String SECURE_CONNECT_BUNDLE = "/path/to/secure-connect-driver-demo.zip";
+	public static final String CLIENT_ID = "client-id";
+	public static final String CLIENT_SECRET = "client-scret";
+	public static final String KEYSPACE = "demo";
+	
+	protected CqlSession session = null;
+	
+	public ConnectionClient() { }
+		
+	public void connect() {
+        try {
+        	this.session = CqlSession.builder()
+    	        .withCloudSecureConnectBundle(Paths.get(SECURE_CONNECT_BUNDLE))
+    	        .withAuthCredentials(CLIENT_ID, CLIENT_SECRET)
+    	        .withKeyspace(KEYSPACE)
+    	        .build();
+        	
+            Metadata metadata = this.session.getMetadata();
+            for (Node node : metadata.getNodes().values()) {
+            	System.out.println(node);
+            }
+        } catch (Exception ex) {
+        	System.out.println("Error!");
+        }
+	}
+	
+	public void close() {
+		this.session.close();
+	}
+    
+	public static void main(String[] args) {
+		ConnectionClient client = new ConnectionClient();
+		client.connect();
+		client.close();
+	}
+}
+----

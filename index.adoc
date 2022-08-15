@@ -1,0 +1,221 @@
+= Proof of concept connecting to SQL using Java
+:page-layout: gcx-full 
+
+[.gcx-hook-connect='15-26']
+== Step 1: Connect to DB
+Donec posuere, libero non convallis scelerisque, eros quam efficitur velit, 
+et accumsan metus ex pharetra ex. Integer gravida tincidunt pulvinar.
+
+[.gcx-hook-connect='27-50']
+== Step 2: Create DB
+Proin non nisl quis nisl vulputate molestie in sed nisl. Donec augue sapien, rutrum nec volutpat vel, vulputate commodo nisi. Maecenas quis nibh dictum, facilisis eros in, mattis mauris. Donec posuere, libero non convallis scelerisque, eros quam efficitur velit, et accumsan metus ex pharetra ex. Integer gravida tincidunt pulvinar. Suspendisse vitae tempus leo. 
+Pellentesque accumsan maximus sapien, id blandit lorem malesuada eu. Nullam quis vehicula risus.Sed et turpis at mi dictum rhoncus. Nunc sollicitudin quam sit amet lacus congue fermentum. Vivamus dapibus tortor laoreet faucibus pulvinar. Donec condimentum vitae sem nec tristique. Fusce fermentum congue ultricies. Cras in enim at orci vestibulum gravida. Nulla efficitur, neque in interdum blandit, urna ante vehicula nibh, in vestibulum risus massa vitae orci. Nunc quis nunc ex. Nunc tempus nisl ut cursus sagittis. Quisque rhoncus vulputate odio nec fringilla. Sed eu orci ultrices, luctus velit at, vehicula nunc. Vivamus sed faucibus diam. Ut nulla leo, finibus eget vestibulum bibendum, malesuada porta odio. Sed tincidunt ultricies egestas.
+
+[.gcx-hook-connect='52-75']
+== Step 3: Insert data
+Proin non nisl quis nisl vulputate molestie in sed nisl. Sed et turpis at mi dictum rhoncus. Nunc sollicitudin quam sit amet lacus congue fermentum. Vivamus dapibus tortor laoreet faucibus pulvinar. Donec condimentum vitae sem nec tristique. Fusce fermentum congue ultricies. Cras in enim at orci vestibulum gravida. Nulla efficitur, neque in interdum blandit, urna ante vehicula nibh, in vestibulum risus massa vitae orci. Nunc quis nunc ex. Nunc tempus nisl ut cursus sagittis. Quisque rhoncus vulputate odio nec fringilla. Sed eu orci ultrices, luctus velit at, vehicula nunc. Vivamus sed faucibus diam. Ut nulla leo, finibus eget vestibulum bibendum, malesuada porta odio. Sed tincidunt ultricies egestas.
+
+[.gcx-feedback-form]
+== Feel free to comment
+
+
+[.gcx-hook-connect='77-108']
+== Step 4: Select data
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec augue sapien, rutrum nec volutpat vel, vulputate commodo nisi. Maecenas quis nibh dictum, facilisis eros in, mattis mauris. Donec posuere, libero non convallis scelerisque, eros quam efficitur velit, et accumsan metus ex pharetra ex. Integer gravida tincidunt pulvinar. Suspendisse vitae tempus leo. 
+Pellentesque accumsan maximus sapien, id blandit lorem malesuada eu. Nullam quis vehicula risus.
+
+[.gcx-hook-connect='110-145']
+== Step 5: Update data 
+Integer molestie luctus ante, non ultrices ligula. Suspendisse venenatis, purus ultricies pellentesque fermentum, felis ante sodales nisi, venenatis pellentesque tellus dolor ac orci. Morbi nibh lectus, finibus eget condimentum quis, sodales vitae sem. Nam cursus nec lorem a euismod. Phasellus varius convallis sollicitudin. Maecenas elementum dapibus sem quis tempus. Curabitur tristique dui quis leo placerat suscipit. Aliquam urna mi, faucibus non tincidunt a, finibus et lorem. Vestibulum non libero dolor.
+
+[.gcx-hook-connect='147-182']
+== Step 6: Delete data 
+Fusce facilisis id ligula eu sagittis. Nullam vehicula posuere cursus. Duis euismod elit lacinia dignissim maximus. Cras finibus eu diam lobortis dignissim. Etiam nulla lectus, faucibus eu ligula scelerisque, ornare tincidunt magna. Nullam efficitur ligula vel nisi convallis scelerisque. Nunc sollicitudin, nisi in sodales consequat, elit urna commodo nunc, sit amet fermentum dui libero id massa. Nunc dignissim, risus non rhoncus egestas, erat orci venenatis risus, non cursus nisi nulla eget odio. Nunc gravida vestibulum maximus. Integer iaculis erat quis tortor pretium sollicitudin. In ac libero fermentum, scelerisque risus a, tristique tellus. Proin pulvinar tortor sed nisl interdum ullamcorper.
+
+[.gcx-code-connect] 
+[source,java] 
+----
+import java.sql.*;
+ 
+public class SQLiteJDBC
+{
+  public static void main( String args[] )
+  {
+      connectDB();
+      createDB();
+      insertDB();
+      selectDB();
+      //updateDB();
+      //deleteDB();
+  }
+   
+  public static void connectDB()
+  {
+      Connection c = null;
+        try {
+          Class.forName("org.sqlite.JDBC");
+          c = DriverManager.getConnection("jdbc:sqlite:myBlog.sqlite");
+        } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+        }
+        System.out.println("Opened database successfully");
+  }
+  public static void createDB()
+  {
+      Connection c = null;
+        Statement stmt = null;
+        try {
+          Class.forName("org.sqlite.JDBC");
+          c = DriverManager.getConnection("jdbc:sqlite:myBlog.sqlite");
+          System.out.println("Opened database successfully");
+ 
+          stmt = c.createStatement();
+          String sql = "CREATE TABLE web_blog " +
+                       "(ID INTEGER PRIMARY KEY autoincrement," +
+                       " NAME           CHAR(50)    NOT NULL, " + 
+                       " message        TEXT     NOT NULL, " + 
+                       " date_added     datetime)";
+          stmt.executeUpdate(sql);
+          stmt.close();
+          c.close();
+        } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+        }
+        System.out.println("Table created successfully");
+  }
+   
+  public static void insertDB()
+  {
+      Connection c = null;
+        Statement stmt = null;
+        try {
+          Class.forName("org.sqlite.JDBC");
+          c = DriverManager.getConnection("jdbc:sqlite:myBlog.sqlite");
+          c.setAutoCommit(false);
+          System.out.println("Opened database successfully");
+ 
+          stmt = c.createStatement();
+          String sql = "INSERT INTO web_blog (NAME,message,date_added) " +
+                       "VALUES ('Ken', 'Hello every one!!!', datetime())," +
+                       " ('Jim', 'whats up!!!',datetime());"; 
+          stmt.executeUpdate(sql);
+          stmt.close();
+          c.commit();
+          c.close();
+        } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+        }
+        System.out.println("Records created successfully");
+  }
+   
+  public static void selectDB()
+  {
+        Connection c = null;
+        Statement stmt = null;
+        try {
+          Class.forName("org.sqlite.JDBC");
+          c = DriverManager.getConnection("jdbc:sqlite:myBlog.sqlite");
+          c.setAutoCommit(false);
+          System.out.println("Opened database successfully");
+ 
+          stmt = c.createStatement();
+          ResultSet rs = stmt.executeQuery( "SELECT * FROM web_blog;" );
+          while ( rs.next() ) {
+             int id = rs.getInt("id");
+             String  name = rs.getString("name");
+             String  message = rs.getString("message");
+             String date_added = rs.getString("date_added");
+             System.out.println( "ID : " + id );
+             System.out.println( "Name : " + name );
+             System.out.println( "Message : " + message );
+             System.out.println( "Date Added : " + date_added );
+             System.out.println();
+          }
+          rs.close();
+          stmt.close();
+          c.close();
+        } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+        }
+        System.out.println("Operation done successfully");  
+  }
+   
+  public static void updateDB()
+  {
+    Connection c = null;
+    Statement stmt = null;
+    try {
+      Class.forName("org.sqlite.JDBC");
+      c = DriverManager.getConnection("jdbc:sqlite:myBlog.sqlite");
+      c.setAutoCommit(false);
+      System.out.println("Opened database successfully");
+ 
+      stmt = c.createStatement();
+      String sql = "UPDATE web_blog set message = 'This is updated by updateDB()' where ID=1;";
+      stmt.executeUpdate(sql);
+      c.commit();
+ 
+      ResultSet rs = stmt.executeQuery( "SELECT * FROM web_blog;" );
+      while ( rs.next() ) {
+         int id = rs.getInt("id");
+         String  name = rs.getString("name");
+         String  message = rs.getString("message");
+         String date_added = rs.getString("date_added");
+         System.out.println( "ID : " + id );
+         System.out.println( "Name : " + name );
+         System.out.println( "Message : " + message );
+         System.out.println( "Date Added : " + date_added );
+         System.out.println();
+      }
+      rs.close();
+      stmt.close();
+      c.close();
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+    System.out.println("Operation done successfully");
+  }
+   
+  public static void deleteDB()
+  {
+      Connection c = null;
+        Statement stmt = null;
+        try {
+          Class.forName("org.sqlite.JDBC");
+          c = DriverManager.getConnection("jdbc:sqlite:myBlog.sqlite");
+          c.setAutoCommit(false);
+          System.out.println("Opened database successfully");
+ 
+          stmt = c.createStatement();
+          String sql = "DELETE from web_blog where ID=1;";
+          stmt.executeUpdate(sql);
+          c.commit();
+ 
+          ResultSet rs = stmt.executeQuery( "SELECT * FROM web_blog;" );
+          while ( rs.next() ) {
+             int id = rs.getInt("id");
+             String  name = rs.getString("name");
+             String  message = rs.getString("message");
+             String date_added = rs.getString("date_added");
+             System.out.println( "ID : " + id );
+             System.out.println( "Name : " + name );
+             System.out.println( "Message : " + message );
+             System.out.println( "Date Added : " + date_added );
+             System.out.println();
+          }
+          rs.close();
+          stmt.close();
+          c.close();
+        } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+        }
+        System.out.println("Operation done successfully");
+  }
+}
+---- 

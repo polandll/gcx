@@ -1,0 +1,7 @@
+* index.adoc
+* Connecting-to-Astra-java.adoc
+* Connecting-to-Astra-python.adoc		
+* Executing-cql-statements-java.adoc
+* Executing-cql-statements-python.adoc
+* Executing-bound-statements-java.adoc
+* Executing-bound-statements-python.adoc	
