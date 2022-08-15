@@ -1,4 +1,4 @@
-= Proof of concept connecting to SQL using Java
+= SAMPLE Proof of concept connecting to SQL using Java
 :page-layout: gcx-full 
 
 [.gcx-hook-connect='15-26']

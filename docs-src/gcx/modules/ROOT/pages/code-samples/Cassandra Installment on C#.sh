@@ -1,1 +1,0 @@
-dotnet add package CassandraCSharpDriver -v 3.15.0

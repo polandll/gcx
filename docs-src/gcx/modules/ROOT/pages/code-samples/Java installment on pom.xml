@@ -1,6 +1,0 @@
-<!--If using Maven, add the following dependencies to your pom.xml file-->
-<dependency>
-  <groupId>com.datastax.oss</groupId>
-  <artifactId>java-driver-core</artifactId>
-  <version>4.8.0</version>
-</dependency>
