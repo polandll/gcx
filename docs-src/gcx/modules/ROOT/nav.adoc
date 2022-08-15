@@ -1,4 +1,3 @@
-* index.adoc
 * Connecting-to-Astra-java.adoc
 * Connecting-to-Astra-python.adoc		
 * Executing-cql-statements-java.adoc
