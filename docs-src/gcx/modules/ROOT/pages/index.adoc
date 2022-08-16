@@ -1,8 +1,12 @@
 = Connecting to Astra with a driver
 :page-layout: gcx-full
 
-Connecting to Astra can be accomplished with the DataStax drivers: xref:connecting-to-astra-java.adoc[Java]  xref:connecting-to-astra-python.adoc[Python]
+image:java-icon.png[]
+xref:connecting-to-astra-java.adoc[Connecting to Astra] can be accomplished with the DataStax drivers.
+xref:executing-cql-statements-java.adoc[CQL statements], such as creating tables and inserting data, can also be done with drivers.
+CQL statements can be xref:executing-bound-statements-java.adoc[bound and prepared].
 
-CQL statements, such as creating tables and inserting data, can also be done with drivers: xref:executing-cql-statements-java.adoc[Java]  xref:executing-cql-statements-python.adoc[Python]
-
-CQL statements can be bound and prepared: xref:executing-bound-statements-java.adoc[Java] xref:executing-bound-statements-python.adoc[Python]
+image:python-icon.png[]
+xref:connecting-to-astra-python.adoc[Connecting to Astra] can be accomplished with the DataStax drivers.
+xref:executing-cql-statements-python.adoc[CQL statements], such as creating tables and inserting data, can also be done with drivers.
+CQL statements can be xref:executing-bound-statements-python.adoc[bound and prepared].
