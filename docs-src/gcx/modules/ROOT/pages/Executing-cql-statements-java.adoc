@@ -97,8 +97,8 @@ Issue these two cqlsh commands:
 
 This result is printed out:
 
-[source, plaintext]
-----
+// [source, plaintext]
+// ----
 CREATE KEYSPACE demo WITH replication = {'class': 'NetworkTopologyStrategy', 'us-east1': '3'} AND durable_writes = true;
 
 CREATE TABLE demo.playlists (
@@ -145,4 +145,4 @@ AND memtable_flush_period_in_ms = 0
 AND min_index_interval = 128
 AND read_repair = 'BLOCKING'
 AND speculative_retry = '99PERCENTILE';
-----
+// ----

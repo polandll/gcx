@@ -1,6 +1,7 @@
-* Connecting-to-Astra-java.adoc
-* Connecting-to-Astra-python.adoc		
-* Executing-cql-statements-java.adoc
-* Executing-cql-statements-python.adoc
-* Executing-bound-statements-java.adoc
-* Executing-bound-statements-python.adoc	
+* xref:index.adoc[Using Drivers with Astra]
+* xref:connecting-to-astra-java.adoc[Connecting to Astra with Java]
+* xref:connecting-to-astra-python.adoc[Connecting to Astra with Python]
+* xref:executing-cql-statements-java.adoc[Executing CQL statements with Java]
+* xref:executing-cql-statements-python.adoc[Executing CQL statements with Python]
+* xref:executing-bound-statements-java.adoc[Executing bound (prepared statements with Java]
+* xref:executing-bound-statements-python.adoc[Executing bound (prepared statements with Python]

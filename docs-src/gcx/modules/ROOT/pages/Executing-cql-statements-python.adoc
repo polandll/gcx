@@ -11,19 +11,31 @@ The sample application executes statements to create a schema and insert some da
 
 == Procedure
 
-Retrieving metadata for the cluster is good, but you also want to be able to read and write data to the cluster. The driver lets you execute CQL statements using a session instance that you retrieve from the cluster object. You will add code to your client for:
-* creating tables
-* inserting data into those tables
+Retrieving metadata for the cluster is good, but you also want to be able to read and write data to the cluster. The driver lets you execute CQL statements using a session instance that you retrieve from the cluster object. 
+You will add code to your client to:
 
-[.gcx-hook-connect='44-55']
-== Creating a table
-1. Drop the table if it exists.
-2. Create the table.
+* create tables
+* insert data into those tables
 
-[.gcx-hook-connect='57-68']
-== Loading data
+[.gcx-hook-connect='34-34']
+== Drop a table if it exists
 
-Execute an INSERT statement against the session.
+Drop the table if it already exists and you are rewriting the schema.
+
+[.gcx-hook-connect='35-45']
+== Create a table
+
+Create a Cassandra Query Language (CQL) table with schema to store data.
+
+[.gcx-hook-connect='47-58']
+== Load (insert) data
+
+Execute an INSERT statement to insert data into the table.
+
+[.gcx-hook-connect='63-64']
+== Modify the main code
+
+Modify the main code to include calls to the new classes and execute the create and insert.
 
 [.gcx-code-connect] 
 [source,Python]
@@ -88,7 +100,6 @@ class StatementsClient(ConnectionClient):
         """)
         print('data loaded into demo schema')
         
-
 def main():
     client = StatementsClient()
     client.connect()
@@ -109,8 +120,8 @@ Issue these two cqlsh commands:
 
 This result is printed out:
 
-[source, plaintext]
-----
+// [source, plaintext]
+// ----
 CREATE KEYSPACE demo WITH replication = {'class': 'NetworkTopologyStrategy', 'us-east1': '3'} AND durable_writes = true;
 
 CREATE TABLE demo.playlists (
@@ -157,4 +168,4 @@ AND memtable_flush_period_in_ms = 0
 AND min_index_interval = 128
 AND read_repair = 'BLOCKING'
 AND speculative_retry = '99PERCENTILE';
-----
+// ----

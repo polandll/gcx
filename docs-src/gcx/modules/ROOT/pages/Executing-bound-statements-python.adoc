@@ -1,14 +1,45 @@
 == Executing bound statements
 :page-layout: gcx-full
+:secure-connect-bundle-url: https://docs.datastax.com/en/astra-serverless/docs/connect/secure-connect-bundle.html
 
 Prepare a query string once, reuse with different values. More efficient than simple statements for queries that are used often.
 
+== Prerequisites
+
+* Create an Astra database and {secure-connect-bundle-url}[download your secure connect bundle] that contains connection information such as contact points and certificates.
+* Create a xref:Connecting-to-Astra-python.adoc[connection to Astra].
+
 == Procedure
 
-[.gcx-hook-connect='1-17']
-1. Create bound statement.
-2. Bind data to variables in statement.
-3. Execute bound statement on session object.
+[.gcx-hook-connect='60-65']
+== Create a bound (prepared) statement
+
+Create some bound and prepared statements.
+
+[.gcx-hook-connect='66-74']
+== Bind data to variables
+
+Bind data to variables in statements for song data.
+
+[.gcx-hook-connect='75-81']
+== Execute bound statement
+
+Execute bound statement on session object for song data.
+
+[.gcx-hook-connect='82-104']
+== Bind data to variables
+
+Bind data to variables in statements for playlist data.
+
+[.gcx-hook-connect='105-105']
+== Execute bound statement
+
+Execute bound statement on session object for playlist data.
+
+[.gcx-hook-connect='108-112']
+== Modify the main code
+
+Modify the main code to execute all the code in the new classes.
 
 [.gcx-code-connect] 
 [source,Python] 
