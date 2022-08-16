@@ -1,4 +1,4 @@
-== Executing CQL statements
+= Executing CQL statements
 :page-layout: gcx-full
 :secure-connect-bundle-url: https://docs.datastax.com/en/astra-serverless/docs/connect/secure-connect-bundle.html
 
@@ -7,7 +7,7 @@ The sample application executes statements to create a schema and insert some da
 == Prerequisites
 
 * Create an Astra database and {secure-connect-bundle-url}[download your secure connect bundle] that contains connection information such as contact points and certificates.
-* Create a xref:Connecting-to-Astra-python.adoc[connection to Astra].
+* Create a xref:connecting-to-astra-python.adoc[connection to Astra].
 
 == Procedure
 
