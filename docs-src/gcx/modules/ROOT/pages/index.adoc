@@ -1,5 +1,4 @@
 = Connecting to Astra with a driver
-:page-layout: gcx-full
 
 image:java-icon.png[]
 
