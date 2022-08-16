@@ -65,7 +65,7 @@ import java.nio.file.Paths;
 public class ConnectionClient {
 	public static final String SECURE_CONNECT_BUNDLE = "/path/to/secure-connect-driver-demo.zip";
 	public static final String CLIENT_ID = "client-id";
-	public static final String CLIENT_SECRET = "client-scret";
+	public static final String CLIENT_SECRET = "client-secret";
 	public static final String KEYSPACE = "demo";
 	
 	protected CqlSession session = null;
