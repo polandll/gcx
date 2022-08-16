@@ -1,6 +1,6 @@
 name: docs
-title: GCX
+title: GCX docs
 version: ~
 
 nav:
-  - ROOT/nav.adoc
+- modules/ROOT/nav.adoc
